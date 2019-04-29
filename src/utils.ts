@@ -8,7 +8,7 @@ export const buildQueryParamUrl = (params: BuildsQueryParams) => {
         url += handleBranches(params[param]);
         break;
       case 'meta_data':
-        url += `meta_data[${params[param].key}]=${params[param].value}`;
+        url += `meta_data[${params[param].key}]=${params[param].value}&`;
         break;
       case 'states':
         url += handleStates(params[param]);
@@ -23,7 +23,7 @@ export const buildQueryParamUrl = (params: BuildsQueryParams) => {
 const handleBranches = (branches: string[]) => {
   let url = '';
   if (branches.length === 1) {
-    return `branch=${branches[0]}`;
+    return `branch=${branches[0]}&`;
   }
   branches.forEach((branch: string) => {
     url += `branch[]=${branch}&`;
@@ -34,7 +34,7 @@ const handleBranches = (branches: string[]) => {
 const handleStates = (states: ValidState[]) => {
   let url = '';
   if (states.length === 1) {
-    return `state=${states[0]}`;
+    return `state=${states[0]}&`;
   }
   states.forEach((state: string) => {
     url += `state[]=${state}&`;

@@ -31,15 +31,15 @@ export interface BuildsQueryParams {
   /**
    * Filters the results by the given meta_data.
    */
-  meta_data: MetaData;
+  meta_data?: MetaData;
   /**
    * Filters the results by the given branch or branches.
    */
-  branches: string[];
+  branches?: string[];
   /**
    * Filters the results by the commit (only works for full sha, not for shortened ones).
    */
-  commit: string;
+  commit?: string;
 }
 
 export interface Artifact {
@@ -95,4 +95,82 @@ export interface Artifact {
    * SHA-1 hash of artifact contents as calculated by the agent
    */
   sha1sum: string;
+}
+
+export interface Build {
+  id: string;
+  url: string;
+  web_url: string;
+  number: number;
+  state: ValidState;
+  blocked: boolean;
+  message: string;
+  commit: string;
+  branch: string;
+  env: object;
+  source: string;
+  creator: {
+    id: string,
+    name: string,
+    email: string,
+    avatar_url: string,
+    created_at: string,
+  };
+  jobs: Job[];
+  created_at: string;
+  scheduled_at: string;
+  started_at: string;
+  finished_at: string;
+  meta_data: object;
+  pull_request: object;
+  pipeline: Pipeline;
+}
+
+export interface Job {
+  id: string;
+  type: string;
+  name: string;
+  agent_query_rules: string[];
+  state: boolean;
+  web_url: string;
+  log_url: string;
+  raw_log_url: string;
+  command: string;
+  exit_status: number;
+  artifact_paths: string;
+  artifacts_url?: string;
+  agent: {
+    id: string;
+    url: string;
+    name: string;
+  };
+  created_at: string;
+  scheduled_at: string;
+  started_at: string;
+  finished_at: string;
+}
+
+export interface Pipeline {
+  id: string;
+  url: string;
+  web_url: string;
+  name: string;
+  slug: string;
+  repository: string;
+  provider: {
+    id: string;
+    webhook_url: string;
+  };
+  skip_queued_branch_builds: boolean;
+  skip_queued_branch_builds_filter: string;
+  cancel_running_branch_builds: boolean;
+  cancel_running_branch_builds_filter: string;
+  builds_url: string;
+  badge_url: string;
+  created_at: string;
+  scheduled_builds_count: number;
+  running_builds_count: number;
+  scheduled_jobs_count: number;
+  running_jobs_count: number;
+  waiting_jobs_count: number;
 }
