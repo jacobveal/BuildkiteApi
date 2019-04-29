@@ -9,17 +9,26 @@
   "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib"
+    "build-test": "babel test.js -d test/",
+    "build": "tsc"
   },
   "dependencies": {
     "@babel/preset-env": "^7.4.4",
-    "axios": "^0.18.0"
+    "@types/fs-extra": "^5.0.5",
+    "axios": "^0.18.0",
+    "fs-extra": "^7.0.1",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/runtime": "^7.4.4",
-    "babel-plugin-transform-runtime": "^6.23.0"
+    "@types/axios": "^0.14.0",
+    "@types/node": "^11.13.8",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.4.5"
   }
 }
