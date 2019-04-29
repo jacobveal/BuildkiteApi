@@ -1,10 +1,11 @@
 import { instance } from './api';
-import { buildQueryParamUrl, BuildQueryParams } from './utils';
+import { buildQueryParamUrl } from '../utils';
+import { BuildsQueryParams } from '../types';
 
 export const listBuildsForPipeline = async (
   organization: string,
   pipeline: string,
-  params?: BuildQueryParams) => {
+  params?: BuildsQueryParams) => {
 
   try {
     const queryParams = params ? buildQueryParamUrl(params) : '';

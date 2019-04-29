@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const authHeader = {
-  Authorization: 'Bearer 6b1cb3490aa8960649aae26efc650db45e103170',
+  Authorization: `Bearer ${process.env.BUILDKITE_API_TOKEN}`,
 };
 
 export const instance = axios.create({

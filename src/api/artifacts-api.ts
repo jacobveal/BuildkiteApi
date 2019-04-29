@@ -1,7 +1,7 @@
 import { instance, authHeader } from './api';
 import axios from 'axios';
 import * as fs from 'fs-extra';
-import * as path from 'path';
+import { Artifact } from '../types';
 
 export const listArtifactsForJob = async (artifactsUrl: string) => {
   try {
@@ -11,12 +11,11 @@ export const listArtifactsForJob = async (artifactsUrl: string) => {
   }
 };
 
-export const downloadArtifact = async (artifact: any, directory: string) => {
+export const downloadArtifact = async (artifact: Artifact, directory: string) => {
   try {
     const artifactFilename = extractFileName(artifact);
     const artifactPath = `${directory}/${artifactFilename}`;
-    const pathLocation = path.resolve(__dirname, directory, artifactFilename);
-    await fs.ensureFile(pathLocation);
+    await fs.ensureFile(artifactPath);
 
     const writer = fs.createWriteStream(artifactPath);
     const signedUrl = await getSignedUrl(artifact.download_url);
@@ -46,7 +45,7 @@ const getSignedUrl = async(downloadUrl: string) => {
   }
 };
 
-const extractFileName = (artifact: any) => {
+const extractFileName = (artifact: Artifact) => {
   const strSplit = artifact.filename.split('\\');
   return strSplit[1];
 };
